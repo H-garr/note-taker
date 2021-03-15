@@ -7,6 +7,7 @@ var path = require("path");
 const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
 
+
 module.exports = function(app) {
     app.get("/api/notes", function(req, res) {
         readFileAsync(path.join(__dirname + "/database/db.json"), "utf8") 
@@ -18,30 +19,30 @@ module.exports = function(app) {
 
 
     app.post("/api/notes", (req, res) => {
-        var notenew = req.body;
+        var createnewnote = req.body;
         readFileAsync(path.join(__dirname + "/database/db.json"), "utf8") 
         .then(function (data) {
             notes = [].concat(JSON.parse(data));
-            notenew.id = notes.length ++;
-            notes.push(notenew);
+            createnewnote.id = notes.length ++;
+            notes.push(createnewnote);
             return notes
         }).then(function(data){
         writeFileAsync(path.join(__dirname + "/database/db.json"), JSON.stringify(data))
-            res.json(notenew);
+            res.json(createnewnote);
         })
 })
 
 
     app.delete("/api/notes/:id", function(req, res){
-        var notedel = parseInt(req.params.id);
+        var deletelenote = parseInt(req.params.id);
         readFileAsync(path.join(__dirname + "/database/db.json"), "utf8")
         .then(function(data){
             notes = [].concat(JSON.parse(data));
-            const notenew = [];
+            const createnewnote = [];
             notes.forEach((note) => 
-            notedel !== note.id ? notenew.push(note) : 
-            console.log("note has been deleted! "));
-            return notenew
+            deletelenote !== note.id ? createnewnote.push(note) : 
+            console.log("note has been deleted."));
+            return createnewnote
         }).then(function(notes){
             writeFileAsync(path.join(__dirname + "/database/db.json"), JSON.stringify(notes))
             res.send(notes);
