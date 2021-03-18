@@ -28,13 +28,12 @@ module.exports = function(app) {
            const notes = [].concat(JSON.parse(data));
             createnewnote.id = notes.length ++;
             notes.push(createnewnote);
-            return notes
+            // i returned notes thinking it would repopulate, clearly wrong and was giving me "null" so removed that and it fixed it.
         }).then(function(data){
         writeFileAsync(path.join(__dirname + "/database/db.json"), JSON.stringify(data))
             res.json(createnewnote);
         })
 })
-
 
     app.delete("/api/notes/:id", function(req, res){
         const deletelenote = parseInt(req.params.id);
