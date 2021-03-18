@@ -10,9 +10,11 @@ const writeFileAsync = util.promisify(fs.writeFile);
 
 module.exports = function(app) {
     app.get("/api/notes", function(req, res) {
+        // get route then reading the file
         readFileAsync(path.join(__dirname + "/database/db.json"), "utf8") 
         .then(function(data){
-            notes=[].concat(JSON.parse(data))
+            const notes=[].concat(JSON.parse(data))
+            console.log(notes)
             return res.json(notes);
         })
     });
@@ -22,7 +24,8 @@ module.exports = function(app) {
         var createnewnote = req.body;
         readFileAsync(path.join(__dirname + "/database/db.json"), "utf8") 
         .then(function (data) {
-            notes = [].concat(JSON.parse(data));
+            console.log(data)
+           const notes = [].concat(JSON.parse(data));
             createnewnote.id = notes.length ++;
             notes.push(createnewnote);
             return notes
@@ -34,7 +37,8 @@ module.exports = function(app) {
 
 
     app.delete("/api/notes/:id", function(req, res){
-        var deletelenote = parseInt(req.params.id);
+        const deletelenote = parseInt(req.params.id);
+        // read as a string for some reason so i had to pase the data
         readFileAsync(path.join(__dirname + "/database/db.json"), "utf8")
         .then(function(data){
             notes = [].concat(JSON.parse(data));
