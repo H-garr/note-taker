@@ -26,7 +26,7 @@ Contact me at :
 ## Walkthrough Video & Picture: 
 
 ![Pic of HTML](./assets/pic-of-working-site.png)
-<a href="https://gyazo.com/739d8e468783cbee61f04d57d44b3553">picture isnt working so heres a link</a>
+
 
 <a href="https://drive.google.com/file/d/1C7nwQYp7aqb2KPTJt2BBzEsZ33X-2WnO/view">Video Here</a>
 - - -
